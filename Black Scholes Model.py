@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[62]:
-
 
 import math
 from scipy.stats import norm
-
-
-# In[70]:
-
 
 def black_scholes_model_prob(s0, k, t, r, sigma): #Returns the probability of a stock reaching a price, k in a time period, t
     """
@@ -25,10 +19,6 @@ def black_scholes_model_prob(s0, k, t, r, sigma): #Returns the probability of a 
 
     d1 = (math.log(s0 / k) + (r + sigma**2 / 2) * t) / (sigma * math.sqrt(t))
     return(norm.cdf(d1))
-
-
-# In[71]:
-
 
 def black_scholes_model(s0, k, t, r, sigma): #Returns the option price
     """
@@ -49,23 +39,14 @@ def black_scholes_model(s0, k, t, r, sigma): #Returns the option price
     return call_price
 
 
-# In[72]:
-
-
 pk1 = black_scholes_model_prob(10, 12, .5, .02, .7) + black_scholes_model_prob(10, 14, 1, .02, .7) #Finds the probability of the two cases
 pk2 = 1-pk1
 k1 = 11
 k2 = 10
 
 
-# In[86]:
-
-
 fairOptionPrice = round((pk1 * black_scholes_model(10, k1, 1, .02, .7)) + (pk2 * black_scholes_model(10, k2, 1, .02, .7)), 2) #Finds the expected value of the stock option using the probabilities of each situation, rounded to two decimal places
 
 
-# In[87]:
-
-
-print("The fair price for thi warrant is: $" + str(fairOptionPrice)) #Prints the fair warrant price
+print("The fair price for this warrant is: $" + str(fairOptionPrice)) #Prints the fair warrant price
 
