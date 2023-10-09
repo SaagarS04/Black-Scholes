@@ -18,7 +18,7 @@ def black_scholes_model_prob(s0, k, t, r, sigma): #Returns the probability of a 
     """
 
     d1 = (math.log(s0 / k) + (r + sigma**2 / 2) * t) / (sigma * math.sqrt(t))
-    return(norm.cdf(d1))
+    return(norm.cdf(-d1))
 
 def black_scholes_model(s0, k, t, r, sigma): #Returns the option price
     """
@@ -39,7 +39,9 @@ def black_scholes_model(s0, k, t, r, sigma): #Returns the option price
     return call_price
 
 
-pk1 = black_scholes_model_prob(10, 12, .5, .02, .7) + black_scholes_model_prob(10, 14, 1, .02, .7) #Finds the probability of the two cases
+p1 = black_scholes_model_prob(10, 12, .5, .02, .7) + black_scholes_model_prob(10, 14, 1, .02, .7) #Finds the probability of either of the two cases happening
+p2 = black_scholes_model_prob(10, 12, .5, .02, .7) * black_scholes_model_prob(10, 14, 1, .02, .7) #Finds the probability of both of the cases happening
+pk1 = p1 - p2 #Finds the probability of one of the cases happening
 pk2 = 1-pk1
 k1 = 11
 k2 = 10
